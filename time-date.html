@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Time Widget</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+
+    body {
+      font-family: Trebuchet MS, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f4f4f9;
+    }
+
+    .time-widget {
+      padding: 20px;
+      background: #E5E4E2;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    .time-widget h1 {
+      font-family: Courier, monospace;
+      font-size: 4em;
+      margin: 0;
+      color: #36454F;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #899499;
+      padding: 10px 15px;
+      border-radius: 10px;
+      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .time-widget h1 span {
+      margin: 0;
+    }
+
+    .time-widget .date-container {
+      margin-top: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #899499;
+      padding: 5px 15px;
+      border-radius: 10px;
+      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+      font-size: 1.2em;
+      color: #36454F;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="time-widget">
+    <h1><span id="hour"></span>:<span id="minute"></span></h1>
+    <div class="date-container">
+      <span id="day-name"></span>
+      <span id="calendar-date"></span>
+    </div>
+  </div>
+
+  <script>
+    function updateTime() {
+      const hourElement = document.getElementById('hour');
+      const minuteElement = document.getElementById('minute');
+      const dayNameElement = document.getElementById('day-name');
+      const calendarDateElement = document.getElementById('calendar-date');
+      const now = new Date();
+      const hour = now.getHours().toString().padStart(2, '0');
+      const minute = now.getMinutes().toString().padStart(2, '0');
+      const dayName = now.toLocaleDateString('en-US', {
+        weekday: 'long'
+      });
+      const calendarDate = now.toLocaleDateString('en-US', {
+        month: 'short',
+        day: 'numeric'
+      });
+      hourElement.textContent = hour;
+      minuteElement.textContent = minute;
+      dayNameElement.textContent = dayName;
+      calendarDateElement.textContent = calendarDate;
+    }
+    // Update the widget every minute
+    setInterval(updateTime, 1000);
+    updateTime();
+  </script>
+</body>
+
+</html>
